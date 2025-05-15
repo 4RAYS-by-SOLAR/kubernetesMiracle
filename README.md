@@ -1,6 +1,7 @@
-# Disclaimer
-* This Lab made for educational purposes
-* We do not encourage anyone to weaponize the lab
+## Disclaimer
+
+The information provided in this repository is intended for educational purposes only. The authors do not assume any responsibility or liability for the misuse of the content presented here. Use the materials at your own risk and ensure compliance with applicable laws and regulations.
+
 
 # What Is it?
 This repository contains an automatically deployed lab for demonstrating attacker capabilities in a kubernetes cluster.
