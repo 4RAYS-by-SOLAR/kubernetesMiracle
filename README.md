@@ -12,7 +12,7 @@ You can use any guide from the Internet for your system.
 
 ## 2. Clone miraclekubernetes repository
 ```sh
-git clone (link)
+git clone https://github.com/4RAYS-by-SOLAR/kubernetesMiracle.git
 ```
 
 ## 3. Execute laboratory-up.sh
