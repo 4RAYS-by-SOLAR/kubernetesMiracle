@@ -1,3 +1,7 @@
+# Disclaimer
+* This Lab made for educational purposes
+* We do not encourage anyone to weaponize the lab
+
 # What Is it?
 This repository contains an automatically deployed lab for demonstrating attacker capabilities in a kubernetes cluster.
 
