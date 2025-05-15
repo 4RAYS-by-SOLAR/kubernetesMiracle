@@ -1,0 +1,53 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: wpvolume
+spec:
+  storageClassName: wpvolume
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /wpvolume
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: sqlvolume
+spec:
+  storageClassName: sqlvolume
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /sqlvolume
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: wpclaim
+  labels:
+    app: wordpress
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: wpvolume
+  resources:
+    requests:
+      storage: 2Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: sqlclaim
+  labels:
+    app: wordpress
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: sqlvolume
+  resources:
+    requests:
+      storage: 2Gi

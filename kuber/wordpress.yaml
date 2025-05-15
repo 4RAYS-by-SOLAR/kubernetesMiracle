@@ -1,0 +1,59 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: wordpress-frontend
+  labels:
+    app: wordpress-frontend
+spec:
+  ports:
+    - port: 80
+  selector:
+    app: wordpress-frontend
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wordpress
+  labels:
+    app: wordpress-frontend
+spec:
+  selector:
+    matchLabels:
+      app: wordpress-frontend
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: wordpress-frontend
+    spec:
+      initContainers:
+      - name: wait-for-mysql
+        image: appropriate/curl
+        command: ['sh', '-c', 'until nc -z wordpress-mysql 3306; do echo waiting for mysql; sleep 2; done;']
+      containers:
+      - image: wordpress:6.2.1-apache
+        name: wordpress
+        imagePullPolicy: Always
+        env:
+        - name: WORDPRESS_DB_HOST
+          value: wordpress-mysql
+        - name: WORDPRESS_DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-pass
+              key: password
+        - name: WORDPRESS_DB_USER
+          value: wordpress
+        ports:
+        - containerPort: 80
+          name: wordpress
+        volumeMounts:
+        - name: wordpresstorage
+          mountPath: /var/www/html
+      serviceAccountName: wordpressowner
+      volumes:
+      - name: wordpresstorage
+        persistentVolumeClaim:
+          claimName: wpclaim

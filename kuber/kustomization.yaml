@@ -1,0 +1,13 @@
+secretGenerator:
+- name: mysql-pass
+  literals:
+  - password=123
+resources:
+  - vulnaccounts.yaml
+  - registrysecrets.yaml
+  - registryvolume.yaml
+  - registrypod.yaml
+  - volumes.yaml
+  - sqlserver.yaml
+  - wordpress.yaml
+  - podforbackdoorregistry.yaml
